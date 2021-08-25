@@ -9,24 +9,22 @@ module.exports = (config) => {
   const configs = (config instanceof Array ? config : [config]).filter(x => !!x);
 
   configs.forEach(async config => {
-    const normalizedConfig = normalizeConfig(config);
-    const {
-      systemsSetupPath,
-      srcGlob,
-    } = normalizedConfig;
+    const c = normalizeConfig(config);
 
     try {
-      await fs.stat(systemsSetupPath)
+      await fs.stat(c.systemsSetupFile)
     } catch (err) {
       if (err.code === 'ENOENT') {
-        await fs.writeFile(systemsSetupPath, '');
+        await fs.writeFile(c.systemsSetupFile, '');
       }
     }
 
-    const paths = await glob(srcGlob);
-    paths.forEach(path => handleSystemFile(path, normalizedConfig));
+    const paths = await glob(c.glob);
+    paths.forEach(path => handleSystemFile(path, c));
 
-    watchSystems(config);
+    if (typeof config.watch === 'undefined' || config.watch === true) {
+      watchSystems(config);
+    }
   });
 
 };

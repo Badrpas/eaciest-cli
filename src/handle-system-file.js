@@ -11,25 +11,29 @@ const ACORN_OPTIONS = {
 };
 
 
-module.exports = function handleSystemFileChange (path, options) {
+module.exports = function handleSystemFileChange (path, config) {
+  const importPath = './' + relative(config.systemsSetupDir, path)
+    .replace(/\\/g, '/')
+    .replace(/\.js$/, '');
+
+  console.log(`Handling system file ${chalk.green(importPath)}`);
+
   const src = fs.readFileSync(path, { encoding: 'utf-8' });
   const systems = extractSystems(src, {
     acorn: {
-      ...(options.acorn ?? {}),
       ...ACORN_OPTIONS,
+      ...(config.acorn ?? {}),
     },
   });
 
-  const importPath = './' + relative(options.systemsSetupDir, path).replace(/\\/g, '/').replace(/\.js$/, '');
-  console.log(`System file ${chalk.green(importPath)} changed`);
-  const setupSrc = fs.readFileSync(options.systemsSetupPath).toString();
+  const setupSrc = fs.readFileSync(config.systemsSetupFile).toString();
 
   const outSetupSrc = aggregateSystems({
+    exportFnName: config.functionName,
     src: setupSrc,
     importPath,
     systems,
-    exportFnName: options.systemsExportFunctionName,
   });
 
-  fs.writeFileSync(options.systemsSetupPath, outSetupSrc);
+  fs.writeFileSync(config.systemsSetupFile, outSetupSrc);
 };

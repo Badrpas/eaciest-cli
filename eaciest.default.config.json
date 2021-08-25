@@ -1,0 +1,10 @@
+{
+  "root": "src",
+  "glob": "**/systems/**/*.js",
+  "systemsSetupFile": "system-setup.js",
+  "functionName": "setup_systems",
+  "acorn": {
+    "sourceType": "module",
+    "ecmaVersion": "latest"
+  }
+}
