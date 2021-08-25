@@ -1,4 +1,5 @@
 const { resolve } = require('path');
+const normalizeConfig = require('./src/normalize-config');
 
 const [,, ...args] = process.argv;
 const DEFAULT_CONFIG_PATH = './eaciest.config';
@@ -20,9 +21,9 @@ const get_config_file_name = () => {
 const get_config = (configFileName = get_config_file_name()) => {
   const configPath = resolve(process.cwd(), configFileName);
   try {
-    return require(configPath);
+    return normalizeConfig(require(configPath));
   } catch (err) {
-    return {};
+    return normalizeConfig({});
   }
 }
 
