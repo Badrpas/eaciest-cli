@@ -2,6 +2,7 @@
   "name": "eaciest-cli",
   "version": "0.1.1",
   "license": "MIT",
+  "main": "./src/index.js",
   "bin": {
     "eaciest": "./cli.js"
   },
