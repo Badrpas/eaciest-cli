@@ -5,22 +5,22 @@ const normalizeConfig = require('./normalize-config');
 const handleSystemFile = require('./handle-system-file');
 const watchSystems = require('./watch-systems');
 
-module.exports = (config) => {
-  const configs = (config instanceof Array ? config : [config]).filter(x => !!x);
+module.exports = (rawConfig) => {
+  const rawConfigs = (rawConfig instanceof Array ? rawConfig : [rawConfig]).filter(x => !!x);
 
-  configs.forEach(async config => {
-    const c = normalizeConfig(config);
+  rawConfigs.forEach(async rawConfig => {
+    const config = normalizeConfig(rawConfig);
 
     try {
-      await fs.stat(c.systemsSetupFile)
+      await fs.stat(config.systemsSetupFile)
     } catch (err) {
       if (err.code === 'ENOENT') {
-        await fs.writeFile(c.systemsSetupFile, '');
+        await fs.writeFile(config.systemsSetupFile, '');
       }
     }
 
-    const paths = await glob(c.glob);
-    paths.forEach(path => handleSystemFile(path, c));
+    const paths = await glob(config.glob);
+    paths.forEach(path => handleSystemFile(path, config));
 
     if (typeof config.watch === 'undefined' || config.watch === true) {
       watchSystems(config);

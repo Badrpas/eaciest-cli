@@ -6,10 +6,8 @@ const normalizeConfig = require('./normalize-config');
 
 const watchSystems = async (options = {}) => {
   const config = normalizeConfig(options);
-  const { srcGlob, systemsSetupPath } = config;
 
-
-  chokidar.watch(srcGlob)
+  chokidar.watch(config.glob)
     .on('change', path => {
       handleSystemFileChange(path, config);
     })
@@ -17,7 +15,7 @@ const watchSystems = async (options = {}) => {
 
     });
 
-  console.log(`Watching systems changes under ${chalk.green(srcGlob)} for later updates to ${chalk.green(systemsSetupPath)}`);
+  console.log(`Watching systems changes under ${chalk.green(config.glob)} for later updates to ${chalk.green(config.systemsSetupFile)}`);
 };
 
 
