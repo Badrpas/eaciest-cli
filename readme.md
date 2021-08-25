@@ -4,15 +4,23 @@ Provides systems watcher to aggregate their initialization into one file
 
 #### Install
 
-`npm install --save-dev eaciest-cli` 
+`yarn add -D eaciest-cli`
 
 or
 
-`yarn add -D eaciest-cli`
+`npm install --save-dev eaciest-cli` 
 
 #### Run
 
-`npx eaciest`
+`yarn eaciest`
+
+or
+
+`npm run eaciest`
+
+or
+
+`npx eaciest-cli`
 
 #### Config
 
