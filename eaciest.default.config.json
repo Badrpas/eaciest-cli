@@ -3,6 +3,7 @@
   "glob": "**/systems/**/*.js",
   "systemsSetupFile": "system-setup.js",
   "functionName": "setup_systems",
+  "watch": true,
   "acorn": {
     "sourceType": "module",
     "ecmaVersion": "latest"
