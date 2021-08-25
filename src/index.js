@@ -28,3 +28,5 @@ module.exports = (config) => {
   });
 
 };
+
+module.exports.handleSystemFile = require('./handle-system-file');

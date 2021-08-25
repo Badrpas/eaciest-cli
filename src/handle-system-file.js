@@ -11,7 +11,7 @@ const ACORN_OPTIONS = {
 };
 
 
-module.exports = function handleSystemFileChange (path, config) {
+module.exports = function handleSystemFile (path, config) {
   const importPath = './' + relative(config.systemsSetupDir, path)
     .replace(/\\/g, '/')
     .replace(/\.js$/, '');
