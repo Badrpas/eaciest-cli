@@ -63,7 +63,7 @@ const ensure_world_id = (fnNode) => {
 }
 
 const get_init_node = (name, world_id) => {
-  return `${world_id}.addSystemClass(${name})`;
+  return `${world_id}.addSystemClass(${name});`;
 };
 
 const ensure_systems_init = (exportFnName, program, systems) => {
