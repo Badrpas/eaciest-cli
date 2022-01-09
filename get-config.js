@@ -10,7 +10,7 @@ const get_config_file_name = () => {
     return DEFAULT_CONFIG_PATH;
   }
 
-  const match = /^--config(=(.+))$?/.exec(args[idx]);
+  const match = /^--config(=(.+))?$/.exec(args[idx]);
   if (match && match[2]) {
     return match[2];
   }
