@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import fs from 'fs/promises';
 import { resolve } from 'path';
 import { promisify } from 'util';
