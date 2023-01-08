@@ -3,8 +3,8 @@ import { resolve } from 'path';
 import { promisify } from 'util';
 import glob from 'glob';
 import { watchSystems } from "./watch-systems";
-import { Config, normalize } from "./config";
 import { handleSystemFile } from './handle-system-file';
+import { Config, normalize } from "./config";
 
 const read_config = async (): Promise<Partial<Config>> => {
     const module_path = resolve(process.cwd(), 'eaciest.config.js');
@@ -30,6 +30,10 @@ const read_config = async (): Promise<Partial<Config>> => {
 
 async function run() {
     const config = normalize(await read_config())
+
+    if (process.argv.includes('--silent')) {
+        config.silent = true;
+    }
 
     const paths = await promisify(glob)(config.glob);
     await Promise.all(paths.map(path => handleSystemFile(path, config)));

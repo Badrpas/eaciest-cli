@@ -6,6 +6,7 @@ export interface Config {
     systemAggregationFile: string;
     systemInitFunction: string;
     useTs: boolean;
+    silent: boolean,
     recast: {
         options: Partial<Options>,
     },
@@ -19,6 +20,7 @@ export const DEFAULT_CONFIG = Object.freeze<Config>({
     systemAggregationFile: "src/init-systems.js",
     systemInitFunction: "initSystems",
     useTs: false,
+    silent: false,
     recast: {
         options: {
             quote: 'single',

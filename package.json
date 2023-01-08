@@ -8,6 +8,7 @@
     },
     "scripts": {
         "test": "jest",
+        "test:ci": "jest --ci -w=10",
         "build": "tsc",
         "watch": "tsc --watch",
         "test:extract": "node dist/test/extr-system.test.js",

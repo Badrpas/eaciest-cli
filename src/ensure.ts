@@ -13,7 +13,7 @@ const getDefaultId = (importPath: string) => {
     return importPath.replace(/\//g, '_').replace(/\./g, '_');
 }
 
-const ensure_systems_import = (node: any, systems: SystemInfo[], importPath: string): void => {
+const ensure_systems_import = (node: any, systems: SystemInfo[], importPath: string, config: Config): void => {
     for (const system of systems) {
 
         const isDefault = system.name === 'default';
@@ -26,7 +26,7 @@ const ensure_systems_import = (node: any, systems: SystemInfo[], importPath: str
 
         const id = b.identifier(system.name);
 
-        console.log(`Adding import specifier ${chalk.blue(id.name)} from ${chalk.green(importPath)}`);
+        config.silent || console.log(`Adding import specifier ${chalk.blue(id.name)} from ${chalk.green(importPath)}`);
 
         const specifier = isDefault ? b.importDefaultSpecifier(id) : b.importSpecifier(id);
         node.specifiers.push(specifier);

@@ -17,6 +17,7 @@ test('sequential systems', async () => {
             ...DEFAULT_CONFIG,
             systemAggregationFile: resolve(tmp_dir, 'init-systems.ts'),
             useTs: true,
+            silent: true,
         };
         await handleSystemFile(path1, config);
         const out1 = await readFile(config.systemAggregationFile, 'utf-8');
@@ -51,6 +52,7 @@ test('run_parallel', async () => {
         ...DEFAULT_CONFIG,
         systemAggregationFile: resolve(tmp_dir, 'init-systems.ts'),
         useTs: true,
+        silent: true,
     };
     try {
         await writeFile(path1, template('Foo', 'Bar'));

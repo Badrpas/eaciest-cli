@@ -58,7 +58,7 @@ export const aggregate_systems = async ({ importPath, systems = [] }: Options, c
                     if (systems.some(s => s.name === specifier.imported?.name)) {
                         const idx = node.specifiers.indexOf(specifier);
                         node.specifiers.splice(idx, 1);
-                        console.log(`Removed ${chalk.blue(specifier.imported.name)} from imports of ${chalk.green(node.source.value)}`);
+                        config.silent || console.log(`Removed ${chalk.blue(specifier.imported.name)} from imports of ${chalk.green(node.source.value)}`);
                     }
                 }
             } 
@@ -68,7 +68,7 @@ export const aggregate_systems = async ({ importPath, systems = [] }: Options, c
                 ast.program.body.unshift(importNode = importAst.program.body[0]);
             }
 
-            ensure_systems_import(importNode, systems, importPath);
+            ensure_systems_import(importNode, systems, importPath, config);
             const { bodyCode, body, world_id } = ensure_systems_init(ast.program, config);
 
             for (const { name } of systems) {
@@ -76,7 +76,7 @@ export const aggregate_systems = async ({ importPath, systems = [] }: Options, c
                     continue;
                 }
                 body.push(get_init_node(name, world_id));
-                console.log(`Added ${chalk.blue(name)} initialization`);
+                config.silent || console.log(`Added ${chalk.blue(name)} initialization`);
             }
         }
 

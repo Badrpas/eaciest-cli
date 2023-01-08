@@ -17,7 +17,7 @@ export const handleSystemFile = async function handleSystemFile(path: string, co
 
             const systems = await extract_systems(path);
 
-            console.log(`Handling system file ${chalk.green(importPath)} with ${
+            config.silent || console.log(`Handling system file ${chalk.green(importPath)} with ${
                 systems.map(system => chalk.blue(system.name)).join(', ')
             }`);
 
