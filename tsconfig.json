@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "composite": true,
+        "module": "CommonJS",
+        "target": "ES2017",
+        "moduleResolution": "Node",
+        "allowJs": true,
+        "outDir": "dist",
+        "sourceMap": true,
+        "importsNotUsedAsValues": "error",
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true
+    },
+    "include": [
+        "src/**/*.d.ts",
+        "src/**/*.ts",
+        "src/**/*.js",
+        "test/**/*.ts"
+    ],
+    "exclude": [
+        "test/bench/**/*.ts"
+    ]
+}
